@@ -15,9 +15,16 @@ soup = BeautifulSoup(r.content, 'html5lib')
 
 film = random.randrange(1,51)
 
+# table = soup.find('div', attrs = {'class':'lister-list'})
+
+# films = table.find('div', attrs = {'class':'lister-item mode-advanced'})
+
+# for row in films.findAll('a'):
+#     print(row.text)
+
 table = soup.find('div', attrs = {'class':'lister-list'})
 
-films = table.find('div', attrs = {'class':'lister-item mode-advanced'})
+# films = table.findAll('h3', attrs = {'class':'lister-item-header'})
 
-for row in films.findAll('a'):
-    print(row.text)
+for row in table.findAll('h3', attrs = {'class':'lister-item-header'}):
+    print(row.find('a').text)
