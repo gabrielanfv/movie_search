@@ -2,29 +2,22 @@ import requests
 from bs4 import BeautifulSoup
 import random
 
+#select a random genre 
 genre = random.choice(['action', 'action,comedy', 'adventure', 'animation', 'comedy', 'comedy,romance', 'crime', 'drama', 'fantasy', 'horror', 'mystery', 'romance', 'sci-fi', 'thriller'])
 print(genre)
-
-# URL_genre = 'https://www.imdb.com/search/title/?genres='+ genre +'&explore=title_type,genres&title_type=movie&ref_=adv_explore_rhs'
-# r = requests.get(URL_genre)
 
 URL = "https://www.imdb.com/search/title/?genres="+ genre +"&explore=title_type,genres&title_type=movie&ref_=adv_explore_rhs"
 r = requests.get(URL)
 
 soup = BeautifulSoup(r.content, 'html5lib')
-
-film = random.randrange(1,51)
-
-# table = soup.find('div', attrs = {'class':'lister-list'})
-
-# films = table.find('div', attrs = {'class':'lister-item mode-advanced'})
-
-# for row in films.findAll('a'):
-#     print(row.text)
-
 table = soup.find('div', attrs = {'class':'lister-list'})
 
-# films = table.findAll('h3', attrs = {'class':'lister-item-header'})
+films = []
 
+#look for all the names of the movies that appear on that page
 for row in table.findAll('h3', attrs = {'class':'lister-item-header'}):
-    print(row.find('a').text)
+    films.append(row.find('a').text)
+
+
+#select a random movie
+print(random.choice(films))
