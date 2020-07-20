@@ -19,6 +19,6 @@ async def on_message(message):
 
     if message.content.startswith('$movie'):
         
-        await message.channel.send(imdb_random_movies.get_movie())
+        await message.channel.send(imdb_random_movies.get_info())
 
 client.run(os.getenv('DISCORD_TOKEN'))
